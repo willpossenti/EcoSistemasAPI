@@ -1,30 +1,28 @@
 ﻿using System;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Http;
+using Ecosistemas.Business.Services;
+using Ecosistemas.Business.Contexto;
+using Ecosistemas.API.Initial;
+using Ecosistemas.Security.Manager;
+using static Ecosistemas.Security.Manager.Util;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Ecosistemas.API.Data;
-using Ecosistemas.API.Model;
-using Ecosistemas.API.Security;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Http;
-
-
-using static Ecosistemas.API.Security.Util;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.IO;
-using Ecosistemas.API.Business;
 
 namespace Ecosistemas.API
 {
@@ -54,7 +52,12 @@ namespace Ecosistemas.API
             });
 
             services.AddDbContext<CatalogoDbContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                    options.UseSqlServer(SegurancaService.Descriptografar(Configuration.GetConnectionString("DefaultConnection"))));
+
+
+            //services.AddEntityFrameworkNpgsql()
+            //    .AddDbContext<CatalogoDbContext>(options =>
+            //    options.UseNpgsql(SegurancaService.Descriptografar(Configuration.GetConnectionString("PostgreSQLDBConnection"))));
 
             services.AddScoped<UserService>();
             services.AddScoped<AccessManager>();
@@ -75,7 +78,6 @@ namespace Ecosistemas.API
             services.AddCors();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-           
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, CatalogoDbContext context, IServiceProvider services)

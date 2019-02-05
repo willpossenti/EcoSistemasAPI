@@ -52,7 +52,7 @@ namespace Ecosistemas.API.Model
                     {
                         Username = _userMaster.Username,
                         Email = _userMaster.Email,
-                        Password = _userMaster.Password
+                        Password =  _userMaster.Password
                     };
 
                     await new UserService(_context).Incluir(_user, _acessmanager, _user.UserId);

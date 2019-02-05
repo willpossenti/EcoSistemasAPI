@@ -53,3 +53,51 @@ Parameter name: salt
 StackTrace   at System.Security.Cryptography.Rfc2898DeriveBytes..ctor(Byte[] password, Byte[] salt, Int32 iterations, HashAlgorithmName hashAlgorithm)
    at System.Security.Cryptography.Rfc2898DeriveBytes..ctor(String password, Byte[] salt, Int32 iterations)
    at Ecosistemas.API.Security.CryptoHelper.Decrypt(String cipherText) in C:\Users\willian.possenti\source\repos\Ecosistemas.API\Ecosistemas.API\Security\CryptoHelper.cs:line 123
+DateTime : 05/02/2019 14:08:16
+
+
+MessageAn error occurred while updating the entries. See the inner exception for details.
+
+StackTrace   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(DbContext _, ValueTuple`2 parameters, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IReadOnlyList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Ecosistemas.Business.Services.BaseService`1.Remover(Guid Id, Guid UserId) in D:\API\Ecosistemas.API\Ecosistemas.Business\Services\BaseService.cs:line 94
+
+Inner Exception : The DELETE statement conflicted with the REFERENCE constraint "FK_UserRoles_Users_UserId". The conflict occurred in database "DESENVOLVIMENTO_WILLIAN", table "dbo.UserRoles", column 'UserId'.
+The statement has been terminated.
+------******------
+DateTime : 05/02/2019 14:13:29
+
+
+MessageAn error occurred while updating the entries. See the inner exception for details.
+
+StackTrace   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(DbContext _, ValueTuple`2 parameters, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IReadOnlyList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Ecosistemas.Business.Services.BaseService`1.Remover(Guid Id, Guid UserId) in D:\API\Ecosistemas.API\Ecosistemas.Business\Services\BaseService.cs:line 94
+
+Inner Exception : The DELETE statement conflicted with the REFERENCE constraint "FK_UserRoles_Users_UserId". The conflict occurred in database "DESENVOLVIMENTO_WILLIAN", table "dbo.UserRoles", column 'UserId'.
+The statement has been terminated.
+------******------
+DateTime : 05/02/2019 14:14:14
+
+
+MessageAn error occurred while updating the entries. See the inner exception for details.
+
+StackTrace   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(DbContext _, ValueTuple`2 parameters, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IReadOnlyList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Ecosistemas.Business.Services.BaseService`1.Remover(Guid Id, Guid UserId) in D:\API\Ecosistemas.API\Ecosistemas.Business\Services\BaseService.cs:line 94
+
+Inner Exception : The DELETE statement conflicted with the REFERENCE constraint "FK_UserRoles_Users_UserId". The conflict occurred in database "DESENVOLVIMENTO_WILLIAN", table "dbo.UserRoles", column 'UserId'.
+The statement has been terminated.
+------******------

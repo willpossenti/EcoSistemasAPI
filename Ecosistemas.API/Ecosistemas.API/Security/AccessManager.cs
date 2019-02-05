@@ -1,6 +1,4 @@
-﻿using Ecosistemas.API.Data;
-using Ecosistemas.API.Model;
-using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+﻿using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -16,9 +14,12 @@ using System.Security.Claims;
 using System.Security.Principal;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
-using Ecosistemas.API.Utility;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
+using Ecosistemas.Business.Contexto;
+using Ecosistemas.Business.Entities;
+using Ecosistemas.Business.Utility;
+using Ecosistemas.API.Utility;
 
 namespace Ecosistemas.API.Security
 {

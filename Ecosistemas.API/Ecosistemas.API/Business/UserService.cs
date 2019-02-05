@@ -16,6 +16,10 @@ namespace Ecosistemas.API.Business
     {
         Task<CustomResponse<User>> Incluir(User user, AccessManager accessManager, Guid UserId);
         Task<CustomResponse<User>> Alterar(User user, AccessManager accessManager, Guid UserId);
+        Task<CustomResponse<IList<User>>> BuscarTodosUsers();
+        Task<CustomResponse<User>> BuscarUser(Guid id);
+        Task<CustomResponse<User>> ConfirmarSenha(User user, AccessManager accessManager, Guid UserId);
+        Task<CustomResponse<User>> RemoverUser(Guid id,  Guid UserId);
     }
 
     public class UserService : BaseService<User>, IUserService
@@ -49,11 +53,14 @@ namespace Ecosistemas.API.Business
                             _rolesUser.Add(new UserRole { Role = _roleFound, User = user });
                         }
 
+                        var _password = Convert.ToBase64String(accessManager.HashPassword(user.Password, _rng));
+
                         var _userHash = new User()
                         {
                             Username = user.Username,
                             Email = user.Email,
-                            Password = Convert.ToBase64String(accessManager.HashPassword(user.Password, _rng)),
+                            Password = _password,
+                            ConfirmPassword = _password,
                             UserRoles = _rolesUser
                         };
 
@@ -63,7 +70,7 @@ namespace Ecosistemas.API.Business
                 else
                 {
                     user.UserId = UserId = Guid.NewGuid();
-                    user.Password = Convert.ToBase64String(accessManager.HashPassword(user.Password, _rng));
+                    user.Password = user.ConfirmPassword = Convert.ToBase64String(accessManager.HashPassword(user.Password, _rng));
 
                     _response = await base.Incluir(user, UserId);
                 }
@@ -152,6 +159,54 @@ namespace Ecosistemas.API.Business
             }
 
             return _response;
+        }
+
+        public async Task<CustomResponse<User>> ConfirmarSenha(User user, AccessManager accessManager, Guid UserId)
+        {
+            var _response = new CustomResponse<User>();
+
+            try
+            {
+                if (!string.IsNullOrEmpty(user.Email))
+                {
+                    var _userHash = new User()
+                    {
+                        UserId = UserId,
+                        Username = user.Username,
+                        Email = user.Email
+                    };
+
+                    if (!string.IsNullOrEmpty(user.Password))
+                        _userHash.Password = _userHash.ConfirmPassword = Convert.ToBase64String(accessManager.HashPassword(user.Password, _rng));
+
+                    _context.Update<User>(_userHash);
+
+                    await _context.SaveChangesAsync();
+                    _response.Message = "O Usuário alterou a senha padrão para definitiva";
+                    _response.StatusCode = StatusCodes.Status200OK;
+
+                    await GerarLog(_response.Message, typeof(User).Name, UserId);
+                }
+                else
+                {
+
+                    _response.Message = "Não Autorizado";
+                    _response.StatusCode = StatusCodes.Status401Unauthorized;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _response.Message = ex.Message;
+            }
+
+
+            return _response;
+        }
+
+        public async Task<CustomResponse<User>> RemoverUser(Guid Id, Guid UserId)
+        {
+            return await base.Remover(Id, UserId);
         }
     }
 }

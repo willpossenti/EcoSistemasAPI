@@ -1,8 +1,10 @@
 ﻿
-using Ecosistemas.API.Business;
-using Ecosistemas.API.Data;
-using Ecosistemas.API.Model;
-using Ecosistemas.API.Security;
+using Ecosistemas.Business;
+using Ecosistemas.Business.Contexto;
+using Ecosistemas.Business.Entities;
+using Ecosistemas.Business.Interfaces;
+using Ecosistemas.Business.Services;
+using Ecosistemas.Security.Manager;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -17,6 +19,12 @@ namespace EcosistemasAPI.Controllers
     [Route("api/[controller]")]
     public class AuthenticateController : Controller
     {
+        private IUserService _service;
+
+        public AuthenticateController(CatalogoDbContext context)
+        {
+            _service = new UserService(context);
+        }
 
         [AllowAnonymous]
         [HttpPost]
@@ -24,12 +32,11 @@ namespace EcosistemasAPI.Controllers
             [FromBody]User usuario,
             [FromServices]AccessManager accessManager)
         {
-            var resultado = accessManager.ValidateCredentials(usuario).Result;
-            
+            var resultado = _service.ValidateCredentials(usuario, accessManager).Result;
+
             if (resultado.StatusCode == StatusCodes.Status200OK)
             {
-
-                    return accessManager.GenerateToken(resultado.Result);
+                   return _service.GerarAcesso(resultado.Result, accessManager).Result;
             }
             else
             {
