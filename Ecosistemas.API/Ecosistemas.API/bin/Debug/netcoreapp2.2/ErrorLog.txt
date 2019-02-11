@@ -101,3 +101,102 @@ StackTrace   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBa
 Inner Exception : The DELETE statement conflicted with the REFERENCE constraint "FK_UserRoles_Users_UserId". The conflict occurred in database "DESENVOLVIMENTO_WILLIAN", table "dbo.UserRoles", column 'UserId'.
 The statement has been terminated.
 ------******------
+DateTime : 11/02/2019 09:30:57
+
+
+MessageAn error occurred while updating the entries. See the inner exception for details.
+
+StackTrace   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(DbContext _, ValueTuple`2 parameters, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IReadOnlyList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Ecosistemas.Business.Services.BaseService`1.Adicionar(T entity, Guid UserId) in D:\API\Ecosistemas.API\Ecosistemas.Business\Services\BaseService.cs:line 32
+
+Inner Exception : Cannot insert the value NULL into column 'ConfirmPassword', table 'DESENVOLVIMENTO_WILLIAN.dbo.Users'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+------******------
+DateTime : 11/02/2019 09:33:48
+
+
+MessageAn error occurred while updating the entries. See the inner exception for details.
+
+StackTrace   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(DbContext _, ValueTuple`2 parameters, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IReadOnlyList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Ecosistemas.Business.Services.BaseService`1.Adicionar(T entity, Guid UserId) in D:\API\Ecosistemas.API\Ecosistemas.Business\Services\BaseService.cs:line 32
+
+Inner Exception : Cannot insert the value NULL into column 'ConfirmPassword', table 'DESENVOLVIMENTO_WILLIAN.dbo.Users'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+------******------
+DateTime : 11/02/2019 09:49:08
+
+
+MessageAn error occurred while updating the entries. See the inner exception for details.
+
+StackTrace   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(DbContext _, ValueTuple`2 parameters, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IReadOnlyList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Ecosistemas.Business.Services.BaseService`1.Adicionar(T entity, Guid UserId) in D:\API\Ecosistemas.API\Ecosistemas.Business\Services\BaseService.cs:line 32
+
+Inner Exception : Cannot insert the value NULL into column 'ConfirmPassword', table 'DESENVOLVIMENTO_WILLIAN.dbo.Users'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+------******------
+DateTime : 11/02/2019 10:49:28
+
+
+MessageAn error occurred while updating the entries. See the inner exception for details.
+
+StackTrace   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(DbContext _, ValueTuple`2 parameters, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IReadOnlyList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Ecosistemas.Business.Services.BaseService`1.Adicionar(T entity, Guid UserId) in D:\API\Ecosistemas.API\Ecosistemas.Business\Services\BaseService.cs:line 32
+
+Inner Exception : Cannot insert the value NULL into column 'ConfirmPassword', table 'DESENVOLVIMENTO_WILLIAN.dbo.Users'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+------******------
+DateTime : 11/02/2019 10:52:08
+
+
+MessageCannot access a disposed object. A common cause of this error is disposing a context that was resolved from dependency injection and then later trying to use the same context instance elsewhere in your application. This may occur if you are calling Dispose() on the context, or wrapping the context in a using statement. If you are using dependency injection, you should let the dependency injection container take care of disposing context instances.
+Object name: 'CatalogoDbContext'.
+
+StackTrace   at Microsoft.EntityFrameworkCore.DbContext.CheckDisposed()
+   at Microsoft.EntityFrameworkCore.DbContext.get_DbContextDependencies()
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Ecosistemas.Business.Services.BaseService`1.Adicionar(T entity, Guid UserId) in D:\API\Ecosistemas.API\Ecosistemas.Business\Services\BaseService.cs:line 32
+DateTime : 11/02/2019 10:52:08
+
+
+MessageCannot access a disposed object. A common cause of this error is disposing a context that was resolved from dependency injection and then later trying to use the same context instance elsewhere in your application. This may occur if you are calling Dispose() on the context, or wrapping the context in a using statement. If you are using dependency injection, you should let the dependency injection container take care of disposing context instances.
+Object name: 'CatalogoDbContext'.
+
+StackTrace   at Microsoft.EntityFrameworkCore.DbContext.CheckDisposed()
+   at Microsoft.EntityFrameworkCore.DbContext.AddRangeAsync(IEnumerable`1 entities, CancellationToken cancellationToken)
+   at Ecosistemas.Business.Services.BaseService`1.AdicionarRange(List`1 entity, Guid UserId) in D:\API\Ecosistemas.API\Ecosistemas.Business\Services\BaseService.cs:line 52
+DateTime : 11/02/2019 11:00:06
+
+
+MessageAn error occurred while updating the entries. See the inner exception for details.
+
+StackTrace   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(DbContext _, ValueTuple`2 parameters, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IReadOnlyList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Ecosistemas.Business.Services.BaseService`1.Adicionar(T entity, Guid UserId) in D:\API\Ecosistemas.API\Ecosistemas.Business\Services\BaseService.cs:line 32
+
+Inner Exception : Cannot insert the value NULL into column 'ConfirmPassword', table 'DESENVOLVIMENTO_WILLIAN.dbo.Users'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+------******------

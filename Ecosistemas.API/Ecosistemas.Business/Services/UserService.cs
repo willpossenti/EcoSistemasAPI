@@ -23,12 +23,15 @@ namespace Ecosistemas.Business.Services
     {
         private CatalogoDbContext _context;
         private readonly RandomNumberGenerator _rng = RandomNumberGenerator.Create();
+        private IAcessoService _acessoService;
 
         public UserService(CatalogoDbContext context) : base(context)
         {
             _context = context;
+            _acessoService = new AcessoService(context);
 
         }
+
 
         public async Task<CustomResponse<User>> Adicionar(User user, AccessManager accessManager, Guid UserId)
         {
@@ -37,17 +40,17 @@ namespace Ecosistemas.Business.Services
 
             try
             {
-                if (user.UserRoles != null)
+                if (user.UserId == Guid.Empty)
                 {
-                    if (user.UserRoles.Any(x => x.Role != null))
+
+                    if (!_context.Users.Any(x => x.Username == user.Username || x.Email == user.Email))
                     {
+
                         var _rolesUser = new List<UserRole>();
 
-                        foreach (Role role in user.UserRoles.Where(x => x.Role.NameRole != Roles.ROLE_API_MASTER).Select(x => x.Role).ToList<Role>())
+                        foreach (Role role in _context.Roles.Where(x => x.NameRole != Roles.ROLE_API_MASTER).ToList<Role>())
                         {
-                            var _roleFound = _context.Roles.Where(x => x.NameRole == role.NameRole).FirstOrDefault();
-
-                            _rolesUser.Add(new UserRole { Role = _roleFound, User = user });
+                            _rolesUser.Add(new UserRole { Role = role, User = user });
                         }
 
                         var _password = Convert.ToBase64String(accessManager.HashPassword(user.Password, _rng));
@@ -63,6 +66,13 @@ namespace Ecosistemas.Business.Services
 
                         _response = await base.Adicionar(_userHash, UserId);
                     }
+                    else
+                    {
+
+                        _response.Message = "Usuário já cadastrado";
+                        _response.StatusCode = StatusCodes.Status409Conflict;
+                    }
+
                 }
                 else
                 {
@@ -114,7 +124,7 @@ namespace Ecosistemas.Business.Services
 
                     _response.Message = "Não Autorizado";
                     _response.StatusCode = StatusCodes.Status401Unauthorized;
-                  
+
                 }
             }
             catch (Exception ex)
@@ -193,7 +203,7 @@ namespace Ecosistemas.Business.Services
 
                     _response.Message = "Não Autorizado";
                     _response.StatusCode = StatusCodes.Status401Unauthorized;
-                  
+
                 }
 
             }
@@ -289,6 +299,11 @@ namespace Ecosistemas.Business.Services
                 var Token = accessManager.GenerateToken(identity);
                 _result.StatusCode = StatusCodes.Status202Accepted;
                 _result.Result = Token;
+
+                var acesso = new Acesso() {Data = DateTime.Now, User = user, IpAcesso = accessManager.IpAcess };
+
+                await _acessoService.Adicionar(acesso);
+
             }
             catch (Exception ex)
             {

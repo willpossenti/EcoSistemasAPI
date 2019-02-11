@@ -22,26 +22,20 @@ namespace Ecosistemas.Security.Manager
 {
     public class AccessManager
     {
-       // private CatalogoDbContext _catalogoDbContext;
         private SigningConfigurations _signingConfigurations;
         private TokenConfigurations _tokenConfigurations;
         private readonly RandomNumberGenerator _rng = RandomNumberGenerator.Create();
-       // public IServiceProvider _services;
 
         public AccessManager(
-        //  CatalogoDbContext catalogoDbContext,
           SigningConfigurations signingConfigurations,
           TokenConfigurations tokenConfigurations
-            //, IServiceProvider services
             )
         {
-          //  _catalogoDbContext = catalogoDbContext;
             _signingConfigurations = signingConfigurations;
             _tokenConfigurations = tokenConfigurations;
-         //   _services = services;
         }
 
-        
+        public string IpAcess { get; set; }
 
         public Token GenerateToken(ClaimsIdentity identity)
         {

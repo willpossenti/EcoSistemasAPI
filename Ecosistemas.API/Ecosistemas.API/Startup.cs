@@ -23,6 +23,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.IO;
+using Microsoft.AspNetCore.Mvc.Cors.Internal;
 
 namespace Ecosistemas.API
 {
@@ -75,30 +76,40 @@ namespace Ecosistemas.API
             //autenticação e autorização via tokens
             services.AddJwtSecurity(_signingConfigurations, _tokenConfigurations);
 
-            services.AddCors();
+ 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddCors(o => o.AddPolicy("ApiPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
+
 
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, CatalogoDbContext context, IServiceProvider services)
-    {
-        if (env.IsDevelopment())
         {
-            app.UseDeveloperExceptionPage();
-        }
-        else
-        {
-            app.UseHsts();
-        }
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseHsts();
+            }
 
-        new IdentityInitializer(context, _signingConfigurations, _tokenConfigurations, services)
-           .Initialize();
+            new IdentityInitializer(context, _signingConfigurations, _tokenConfigurations, services)
+               .Initialize();
 
-        app.UseHttpsRedirection();
-        app.UseMvc();
+
+            app.UseCors("ApiPolicy");
+            app.UseHttpsRedirection();
+            app.UseMvc();
+        }
     }
-}
 
-    
+
 
 }

@@ -51,6 +51,7 @@ namespace Ecosistemas.API.Initial
                     //Cria o usuário Master
                     var _user = new User()
                     {
+                        UserId = Guid.NewGuid(),
                         Username = _userMaster.Username,
                         Email = _userMaster.Email,
                         Password =  _userMaster.Password

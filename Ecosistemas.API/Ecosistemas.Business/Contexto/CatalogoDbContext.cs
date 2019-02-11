@@ -21,6 +21,8 @@ namespace Ecosistemas.Business.Contexto
 
         public DbSet<Log> Logs { get; set; }
 
+        public DbSet<Acesso> Acessos { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>()
@@ -35,6 +37,8 @@ namespace Ecosistemas.Business.Contexto
             modelBuilder.Entity<Log>()
             .HasKey(t => t.LogId);
 
+            modelBuilder.Entity<Acesso>()
+            .HasKey(t => t.AcessoId);
 
             modelBuilder.Entity<UserRole>()
                 .HasOne(pt => pt.Role)
@@ -46,6 +50,9 @@ namespace Ecosistemas.Business.Contexto
 
             modelBuilder.Entity<Log>()
                 .HasOne(pt => pt.User);
+
+            modelBuilder.Entity<Acesso>()
+           .HasOne(pt => pt.User);
         }
     }
 }

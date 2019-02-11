@@ -38,5 +38,7 @@ namespace Ecosistemas.Business.Entities
 
         public List<UserRole> UserRoles { get; set; }
         public List<Log> Logs { get; set; }
+
+        public List<Acesso> Acessos { get; set; }
     }
 }
