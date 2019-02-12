@@ -298,6 +298,7 @@ namespace Ecosistemas.Business.Services
 
                 var Token = accessManager.GenerateToken(identity);
                 _result.StatusCode = StatusCodes.Status202Accepted;
+                _result.Message = "Acesso Autorizado";
                 _result.Result = Token;
 
                 var acesso = new Acesso() {Data = DateTime.Now, User = user, IpAcesso = accessManager.IpAcess };

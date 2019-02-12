@@ -29,30 +29,35 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
     var _login = function (loginData) {
 
         var deferred = $q.defer();
-
+      
         var data = { "Username": "" + loginData.userName + "", "Password": "" + loginData.password + "" };
 
         $http.post(serviceBase + 'authenticate', JSON.stringify(data), { headers: { 'Content-Type': 'application/json' } }).success(function (response) {
 
             var arrayResponse = [];
-            arrayResponse = angular.fromJson(response.result);
+            arrayResponse = angular.fromJson(response);
 
-            if (angular.fromJson(response).authenticated == true) {
+         
+
+            if (arrayResponse.authenticated == true) {
+
+                console.log(angular.fromJson(arrayResponse.result).result);
 
                 _authentication.isAuth = true;
                 _authentication.userName = loginData.userName;
-                localStorageService.set('authorizationData', { token: angular.fromJson(arrayResponse.result).accessToken });
+                localStorageService.set('authorizationData', { token: angular.fromJson(arrayResponse.result).result.accessToken, Username: angular.fromJson(arrayResponse.result).result.userName });
 
                 //_authentication.useRefreshTokens = loginData.useRefreshTokens;
              
             } else {
 
+             
                 _logOut();
-                deferred.reject(angular.fromJson(response).message);
+                deferred.reject(arrayResponse.message);
  
             }
 
-            deferred.resolve(response);
+            deferred.resolve(response.result);
 
 
         }).error(function (err, status) {

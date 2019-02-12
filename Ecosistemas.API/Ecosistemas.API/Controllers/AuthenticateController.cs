@@ -44,10 +44,9 @@ namespace EcosistemasAPI.Controllers
                 return new
                 {
                     Authenticated = true,
-                    Message = "Acesso autorizado",
-
                     _service.GerarAcesso(resultado.Result, accessManager).Result,
-                    StatusCode = StatusCodes.Status202Accepted
+                    resultado.Message,
+                    StatusCode = StatusCodes.Status401Unauthorized
                 };
 
             }

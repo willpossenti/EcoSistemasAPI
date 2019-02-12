@@ -6,6 +6,10 @@ app.controller('indexController', ['$scope', '$location', 'authService', functio
         $location.path('/home');
     }
 
+    //var authData = localStorageService.get('authorizationData');
+    //console.log(authData);
+
+
     $scope.authentication = authService.authentication;
 
 }]);
