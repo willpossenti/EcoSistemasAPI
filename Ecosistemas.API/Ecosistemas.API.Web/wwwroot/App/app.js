@@ -6,6 +6,8 @@ app.config(function ($routeProvider) {
     $routeProvider.when("/home", {
         controller: "homeController",
         templateUrl: "/app/views/home.html"
+        //,
+       // css: 'css/partial1.css'
     });
 
     $routeProvider.when("/login", {
@@ -38,12 +40,11 @@ app.config(function ($routeProvider) {
         templateUrl: "/app/views/associate.html"
     });
 
-    $routeProvider.otherwise({ redirectTo: "/home" });
+    $routeProvider.otherwise({ redirectTo: "/login" });
 
 });
 
 var serviceBase = 'https://localhost:44307/api/';
-//var serviceBase = 'http://ngauthenticationapi.azurewebsites.net/';
 app.constant('ngAuthSettings', {
     apiServiceBaseUri: serviceBase,
     clientId: 'ngAuthApp'
@@ -56,6 +57,5 @@ app.config(function ($httpProvider) {
 app.run(['authService', function (authService) {
     authService.fillAuthData();
 }]);
-
 
 

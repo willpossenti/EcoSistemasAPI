@@ -6,8 +6,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Http;
-using Ecosistemas.Business.Services;
-using Ecosistemas.Business.Contexto;
+using Ecosistemas.Business.Services.Api;
+using Ecosistemas.Business.Contexto.Api;
+using Ecosistemas.Business.Contexto.Klinikos;
 using Ecosistemas.API.Initial;
 using Ecosistemas.Security.Manager;
 using static Ecosistemas.Security.Manager.Util;
@@ -52,13 +53,16 @@ namespace Ecosistemas.API
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<CatalogoDbContext>(options =>
+            services.AddDbContext<ApiDbContext>(options =>
                     options.UseSqlServer(SegurancaService.Descriptografar(Configuration.GetConnectionString("DefaultConnection"))));
-
 
             //services.AddEntityFrameworkNpgsql()
             //    .AddDbContext<CatalogoDbContext>(options =>
             //    options.UseNpgsql(SegurancaService.Descriptografar(Configuration.GetConnectionString("PostgreSQLDBConnection"))));
+
+
+            services.AddDbContext<KlinikosDbContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("KlinikosConnection")));
 
             services.AddScoped<UserService>();
             services.AddScoped<AccessManager>();
@@ -76,7 +80,7 @@ namespace Ecosistemas.API
             //autenticação e autorização via tokens
             services.AddJwtSecurity(_signingConfigurations, _tokenConfigurations);
 
- 
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddCors(o => o.AddPolicy("ApiPolicy", builder =>
@@ -89,7 +93,7 @@ namespace Ecosistemas.API
 
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, CatalogoDbContext context, IServiceProvider services)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ApiDbContext context, KlinikosDbContext klinikosDbContext, IServiceProvider services)
         {
             if (env.IsDevelopment())
             {
@@ -101,15 +105,18 @@ namespace Ecosistemas.API
             }
 
             new IdentityInitializer(context, _signingConfigurations, _tokenConfigurations, services)
-               .Initialize();
+               .InitializeApi();
 
+            new IdentityInitializer(klinikosDbContext)
+            .InitializeKlinikos();
 
             app.UseCors("ApiPolicy");
             app.UseHttpsRedirection();
             app.UseMvc();
         }
-    }
 
+      
+    }
 
 
 }

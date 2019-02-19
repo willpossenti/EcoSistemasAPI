@@ -4,6 +4,8 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
     var serviceBase = ngAuthSettings.apiServiceBaseUri;
     var authServiceFactory = {};
 
+
+
     var _authentication = {
         isAuth: false,
         userName: "",
@@ -27,21 +29,21 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
     };
 
     var _login = function (loginData) {
-
         var deferred = $q.defer();
       
         var data = { "Username": "" + loginData.userName + "", "Password": "" + loginData.password + "" };
+ 
 
         $http.post(serviceBase + 'authenticate', JSON.stringify(data), { headers: { 'Content-Type': 'application/json' } }).success(function (response) {
 
             var arrayResponse = [];
             arrayResponse = angular.fromJson(response);
+            console.log(response);
 
-         
+            if (arrayResponse.authenticated === true) {
 
-            if (arrayResponse.authenticated == true) {
 
-                console.log(angular.fromJson(arrayResponse.result).result);
+                console.log(angular.fromJson(arrayResponse.result).result.accessToken);
 
                 _authentication.isAuth = true;
                 _authentication.userName = loginData.userName;
@@ -51,7 +53,6 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
              
             } else {
 
-             
                 _logOut();
                 deferred.reject(arrayResponse.message);
  
